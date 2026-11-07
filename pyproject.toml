@@ -1,15 +1,13 @@
 [project]
 name = "attitude-gnc"
 version = "0.1.0"
-description = "Add your description here"
+description = "Attitude estimation and control in Python, built step by step on real sensor data."
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "numpy>=2.5.4",
 ]
 
-[project.scripts]
-attitude-gnc = "attitude_gnc:main"
 
 [build-system]
 requires = ["uv_build>=0.13.6,<0.14.0"]

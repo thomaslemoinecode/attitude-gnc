@@ -1,2 +1,1 @@
-def main() -> None:
-    print("Hello from attitude-gnc!")
+"""Attitude estimation and control project."""
