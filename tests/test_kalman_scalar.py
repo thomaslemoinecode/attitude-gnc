@@ -19,3 +19,23 @@ def test_variance_of_constant_estimation():
 
     P_exact = (1 / P_0 + n / r) ** (-1)
     np.testing.assert_allclose(P, P_exact)
+
+
+def test_steady_state_variance():
+    # parameters: random-walk state (a = 1, q > 0), direct measurement (h = 1)
+    P_0 = 1000.0
+    r = 0.25
+    n = 10000
+    a = 1.0
+    q = 0.01
+    h = 1.0
+
+    x_hat, P = 0.0, P_0
+    for _ in range(n):
+        x_prior, P_prior = predict(x_hat, P, a, q)
+        x_hat, P, _ = update(x_prior, P_prior, z=0.0, h=h, r=r)
+
+    # Steady-state prior variance: positive root of P^2 - q P - q r = 0.
+    # P_0 is deliberately large: the steady state must not depend on it.
+    P_prior_steady = (q + np.sqrt(q**2 + 4 * q * r)) / 2
+    np.testing.assert_allclose(P_prior, P_prior_steady)
